@@ -7,7 +7,7 @@
 	</div>
 	<%-- login --%>
 	<div>
-		<span>아름님 안녕하세요</span>
-		<a href="/user/sign-out">로그아웃</a>
+		<span>${userName}님 안녕하세요</span>
+		<a href="/user/sign-out" class="mr-3">로그아웃</a>
 	</div>
 </div>
