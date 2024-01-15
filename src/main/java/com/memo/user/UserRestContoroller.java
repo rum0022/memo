@@ -1,6 +1,7 @@
 package com.memo.user;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,33 +81,33 @@ public class UserRestContoroller {
 		return result;
 	}
 	
-	@PostMapping("sign-in")
+	@PostMapping("/sign-in")
 	public Map<String, Object> signIn(
 			@RequestParam("loginId") String loginId,
 			@RequestParam("password") String password,
-			HttpServletRequest request) { // 세션
-		// 비밀번호 해싱 - mb5
+			HttpServletRequest request) {
+		
+		// 비밀번호 hashing - md5
 		String hashedPassword = EncryptUtils.md5(password);
 		
-		// db select (loginId, 해싱된 비번이 있는지 조회) => UserEntity 
+		// db 조회(loginId, 해싱된 비밀번호) => UserEntity
 		UserEntity user = userBo.getUserEntityByLoginIdPassword(loginId, hashedPassword);
 		
 		// 응답값
-		Map<String, Object> result = new HashMap<>(); //유저가 있을수도 없을 수도있음. 
-		if (user != null) { // 로그인 성공
+		Map<String, Object> result = new HashMap<>();
+		if (user != null) { // 성공
 			// 로그인 처리
-			// 로그인 정보를 세션에 담는다(사용자마다)
+			// 로그인 정보를 세션에 담는다.(사용자 마다)
 			HttpSession session = request.getSession();
 			session.setAttribute("userId", user.getId());
-			session.setAttribute("loginId", user.getLoginId());
-			session.setAttribute("name", user.getName());
+			session.setAttribute("userLoginId", user.getLoginId());
+			session.setAttribute("userName", user.getName());
 			
 			result.put("code", 200);
 			result.put("result", "성공");
-		} else { // 그런사람 없는 상황
-			//로그인 불가
-			result.put("code", 300); // 권한이 없는건 300대
-			result.put("error_message", "존재하지 않는 사용자 입니다.");
+		} else { // 로그인 불가
+			result.put("code", 300);
+			result.put("error_message", "존재하지 않는 사용자입니다.");
 		}
 		return result;
 	}

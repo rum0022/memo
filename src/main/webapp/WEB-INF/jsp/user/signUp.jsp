@@ -161,7 +161,7 @@
 				// {"code":200, "result":"성공"}
 				if (data.code == 200) {
 					alert("가입을 환영합니다. 로그인 해주세요");
-					location.href = "user/sign-in-view"; //로그인 화면으로 이동
+					location.href = "/user/sign-in-view"; // 로그인 화면으로 이동
 				} else {
 					//로직실패 
 					alert(data.error_message);
