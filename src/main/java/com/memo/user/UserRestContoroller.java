@@ -42,7 +42,7 @@ public class UserRestContoroller {
 			result.put("is-duplicated-id", true);
 		} else { // 중복아님
 			result.put("code", 200);
-			result.put("is-duplicated-id", true);
+			result.put("is-duplicated-id", false);
 		}
 		return result;
 	}

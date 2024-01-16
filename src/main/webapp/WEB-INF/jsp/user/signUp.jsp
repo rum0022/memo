@@ -103,7 +103,7 @@
 		
 		// 1. 회원가입을 눌렀을때
 		$('#signUpForm').on("submit", function(e) {
-			//e.preventDefault(); //submit 기능막음
+			e.preventDefault(); //submit 기능막음
 			//alert("회원가입");
 		
 			// validation
