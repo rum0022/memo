@@ -14,8 +14,8 @@ import com.memo.post.mapper.PostMapper;
 @Controller
 public class TestController {
 
-	@Autowired
-	private PostMapper postMapper;
+//	@Autowired
+//	private PostMapper postMapper;
 	
 	@GetMapping("/test1")
 	@ResponseBody
@@ -38,9 +38,9 @@ public class TestController {
 		return "test/test";
 	}
 	
-	@GetMapping("/test4")
-	@ResponseBody
-	public List<Map<String, Object>> test4() {
-		return postMapper.selectPostList();
-	}
+//	@GetMapping("/test4")
+//	@ResponseBody
+//	public List<Map<String, Object>> test4() {
+//		return postMapper.selectPostList();
+//	}
 }
