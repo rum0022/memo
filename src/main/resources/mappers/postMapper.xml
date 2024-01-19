@@ -39,4 +39,20 @@
  			, NOW()
  		)
  	</insert>
+ 	
+ 	<select id="selectPostByPostIdUserId" resultType="com.memo.post.domain.Post">
+ 		SELECT
+ 			`id`
+			,`userId`
+			,`subject`
+			,`content`
+			,`imagePath`
+			,`createdAt`
+			,`updatedAt`
+	 	FROM
+	 		`post`
+	 	WHERE
+	 		`id` = #{postId}
+	 	AND `userId` = #{userId}				
+ 	</select>
  </mapper>
