@@ -9,6 +9,9 @@ import java.nio.file.Paths;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Component // spring bean  - 오토와이어드가 가능하다는 뜻
 public class FileManagerService {
 
@@ -43,6 +46,34 @@ public class FileManagerService {
 		// 주소는 이렇게 될 것이다. (예언)
 		// /images/aaaa_18323435/sun.png -> 이렇게 치고들어오면 웹주소로 그림을 볼 수 있음.
 		return "/images/" + directoryName + "/" + file.getOriginalFilename();
+	}
+	
+	//input: imagePath      output:X
+	public void deleteFile(String imagePath) { // /images/aaaa_1705483558718/winter-8425500_640.jpg 이런값이 온다
+		// FILE_UPLOAD_PATH = "D:\\choiareum\\6_spring_project\\MEMO\\memo_workspace\\images/aaaa_1705483558718/winter-8425500_640.jpg
+		// 주소에 겹치는 /image/ 지운다.   
+		Path path = Paths.get(FILE_UPLOAD_PATH + imagePath.replace("/images/", ""));
+		
+		// 삭제할 이미지가 존재하는가?
+		if (Files.exists(path)) {
+			// 이미지 삭제
+			try {
+				Files.delete(path);
+			} catch (IOException e) {
+				log.info("[파일매니저 삭제] 이미지 삭제 실패. path:{}", path.toString());
+				return;
+			}
+			
+			// 폴더(디렉토리)삭제
+			path = path.getParent();
+			if (Files.exists(path)) {
+				try {
+					Files.delete(path);
+				} catch (IOException e) {
+					log.info("[파일매니저 삭제] 폴더 삭제 실패. path:{}", path.toString());
+				} // 마지막 단계라 리턴안해도 여기서 끝날것임
+			}
+		}
 	}
 }
 
