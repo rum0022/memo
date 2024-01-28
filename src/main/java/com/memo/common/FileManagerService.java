@@ -16,8 +16,9 @@ import lombok.extern.slf4j.Slf4j;
 public class FileManagerService {
 
 	// 실제 업로드 된 이미지가 저장될 경로 (서버주소) 
-	public static final String FILE_UPLOAD_PATH = "D:\\choiareum\\6_spring_project\\MEMO\\memo_workspace\\images/";   // 마지막 슬래시 꼭붙인다.,상수는 대문자하는 특징있음
+	//public static final String FILE_UPLOAD_PATH = "D:\\choiareum\\6_spring_project\\MEMO\\memo_workspace\\images/";   // 마지막 슬래시 꼭붙인다.,상수는 대문자하는 특징있음
 	// 집용 : public static final String FILE_UPLOAD_PATH = "D:\\choiareum\\6_spring_project\\MEMO\\memo_workspace\\images";
+	public static final String FILE_UPLOAD_PATH = "D:\\choiareum\\6_spring_project\\MEMO\\memo_workspace\\images";
 	
 	//input : file원본,userLoginId(폴더명)    output : 이미지경로
 	public String saveFile(String loginId, MultipartFile file) {
